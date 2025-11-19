@@ -1,0 +1,12 @@
+{
+    "getById": {
+        "description": "Gets an entry from 'usuarios' by its primary key",
+        "route": "/usuarios/$usuarioId",
+        "method": "GET",
+        "sql": "SELECT * FROM usuarios WHERE usuarioId = $usuarioId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

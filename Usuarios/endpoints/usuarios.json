@@ -1,0 +1,64 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'usuarios'",
+        "route": "/usuarios",
+        "method": "GET",
+        "sql": "SELECT * FROM usuarios",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'usuarios' by its primary key",
+        "route": "/usuarios/age/$age",
+        "method": "GET",
+        "sql": "SELECT * FROM usuarios WHERE edad = $age",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'usuarios'",
+        "route": "/usuarios",
+        "method": "POST",
+        "sql": "INSERT INTO usuarios (nombre, genero, edad, email) VALUES ($nombre, $genero, $edad, $email)",
+        "request_body_params": [
+            "nombre",
+            "genero",
+            "edad",
+            "email"
+        ],
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'usuarios' by its primary key",
+        "route": "/usuarios/$usuarioId",
+        "method": "PUT",
+        "sql": "UPDATE usuarios SET nombre = $nombre, genero = $genero, edad = $edad, email = $email WHERE usuarioId = $usuarioId",
+        "request_body_params": [
+            "nombre",
+            "genero",
+            "edad",
+            "email"
+        ],
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'usuarios' by its primary key",
+        "route": "/usuarios/$usuarioId",
+        "method": "DELETE",
+        "sql": "DELETE FROM usuarios WHERE usuarioId = $usuarioId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}
