@@ -1,0 +1,132 @@
+
+### This is an auto-generated test suite, it needs to be completed with valid data.
+### These are not all tests you need, more of them should be created to evaluate the functional
+### requirements of your project. These tests only test the CRUD endpoints of the entity.
+### Silence is a DEAL research team project, more info about us in https://deal.us.es
+@BASE = http://127.0.0.1:8080/api/v1
+
+### Auxiliary query
+### Positive test
+### Test 00: Get all existing groupsstudents
+### This query is used in several of the below tests it should be executed first.
+# @name groupsstudents
+GET {{BASE}}/groupsstudents
+
+### Login a(n) employees and save the generated token 
+### This token is used in several of the below tests it should be executed second.
+# @name login
+POST {{BASE}}/login 
+Content-Type: application/json 
+
+{ 
+	"email": ###REPLACE###,
+	"password": ###REPLACE###
+}
+
+###
+@token = {{login.response.body.sessionToken}}
+
+
+### TESTS BEGIN
+
+### Test 01: Get one existing groupsstudents by its id.
+### positive test 
+@groId = {{groupsstudents.response.body.0.groupStudentId}}
+GET {{BASE}}/groupsstudents/{{groId}} 
+Content-Type: application/json 
+
+
+### Test 02: Try get one existing groupsstudents by its nonexistent id.
+### negative test 
+GET {{BASE}}/groupsstudents/999999999
+Content-Type: application/json 
+
+
+### Test 03: Add a new groupsstudents successfully
+### Positive test 
+### We assume that the token has been aquired by the login request.
+# @name newgroupsstudents
+POST {{BASE}}/groupsstudents 
+Content-Type: application/json 
+Token: {{token}} 
+
+{
+	"groupId": ###REPLACE###,
+	"studentId": ###REPLACE###
+} 
+
+### Check the created groupsstudents
+
+@newgroupsstudentsid = {{newgroupsstudents.response.body.lastId}}
+GET {{BASE}}/groupsstudents/{{newgroupsstudentsid}}
+Content-Type: application/json 
+
+### Test 04: Add a new groupsstudents without a session token
+### Negative test 
+POST {{BASE}}/groupsstudents 
+Content-Type: application/json 
+
+{ 
+	"groupId": ###REPLACE###,
+	"studentId": ###REPLACE###
+}
+
+### Test 05: Modify an existing groupsstudents 
+### Positive test 
+@groId = {{groupsstudents.response.body.0.groupStudentId}} 
+PUT {{BASE}}/groupsstudents/{{groId}} 
+Content-Type: application/json 
+Token: {{token}} 
+
+{ 
+	"groupId": ###REPLACE###,
+	"studentId": ###REPLACE###
+}
+
+### Check the modified groupsstudents
+
+GET {{BASE}}/groupsstudents/{{newgroupsstudentsid}}
+Content-Type: application/json 
+
+### Test 06: Try to modify an existing groupsstudents without a session token
+### Negative test
+@groId = {{groupsstudents.response.body.0.groupStudentId}}
+PUT {{BASE}}/groupsstudents/{{groId}}
+Content-Type: application/json
+
+{
+	"groupId": ###REPLACE###,
+	"studentId": ###REPLACE###
+}
+
+### Test 07: Delete an existing groupsstudents
+### Positive test
+
+### Create a new groupsstudents, which we will delete
+# @name createdgroToDelete
+POST {{BASE}}/groupsstudents
+Content-Type: application/json
+Token: {{token}}
+
+{
+	"groupId": ###REPLACE###,
+	"studentId": ###REPLACE###
+}
+
+### Check the created groupsstudents
+@grodelId = {{createdgroToDelete.response.body.lastId}}
+GET {{BASE}}/groupsstudents/{{grodelId}}
+Content-Type: application/json 
+
+### Delete the groupsstudents
+DELETE {{BASE}}/groupsstudents/{{grodelId}}
+Token: {{token}}
+
+### Check the deleted groupsstudents
+GET {{BASE}}/groupsstudents/{{grodelId}}
+Content-Type: application/json 
+
+### Test 08: Try to delete a groupsstudents without a session token
+### Negative test
+DELETE {{BASE}}/groupsstudents/{{groId}}
+

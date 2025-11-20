@@ -1,0 +1,66 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'grades'",
+        "route": "/grades",
+        "method": "GET",
+        "sql": "SELECT * FROM grades",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'grades' by its primary key",
+        "route": "/grades/$gradeId",
+        "method": "GET",
+        "sql": "SELECT * FROM grades WHERE gradeId = $gradeId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'grades'",
+        "route": "/grades",
+        "method": "POST",
+        "sql": "INSERT INTO grades (value, gradeCall, withHonours, studentId, groupId) VALUES ($value, $gradeCall, $withHonours, $studentId, $groupId)",
+        "request_body_params": [
+            "value",
+            "gradeCall",
+            "withHonours",
+            "studentId",
+            "groupId"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'grades' by its primary key",
+        "route": "/grades/$gradeId",
+        "method": "PUT",
+        "sql": "UPDATE grades SET value = $value, gradeCall = $gradeCall, withHonours = $withHonours, studentId = $studentId, groupId = $groupId WHERE gradeId = $gradeId",
+        "request_body_params": [
+            "value",
+            "gradeCall",
+            "withHonours",
+            "studentId",
+            "groupId"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'grades' by its primary key",
+        "route": "/grades/$gradeId",
+        "method": "DELETE",
+        "sql": "DELETE FROM grades WHERE gradeId = $gradeId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

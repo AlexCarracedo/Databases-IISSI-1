@@ -1,0 +1,64 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'groups'",
+        "route": "/groups",
+        "method": "GET",
+        "sql": "SELECT * FROM groups",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'groups' by its primary key",
+        "route": "/groups/$groupId",
+        "method": "GET",
+        "sql": "SELECT * FROM groups WHERE groupId = $groupId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'groups'",
+        "route": "/groups",
+        "method": "POST",
+        "sql": "INSERT INTO groups (name, activity, year, subjectId) VALUES ($name, $activity, $year, $subjectId)",
+        "request_body_params": [
+            "name",
+            "activity",
+            "year",
+            "subjectId"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'groups' by its primary key",
+        "route": "/groups/$groupId",
+        "method": "PUT",
+        "sql": "UPDATE groups SET name = $name, activity = $activity, year = $year, subjectId = $subjectId WHERE groupId = $groupId",
+        "request_body_params": [
+            "name",
+            "activity",
+            "year",
+            "subjectId"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'groups' by its primary key",
+        "route": "/groups/$groupId",
+        "method": "DELETE",
+        "sql": "DELETE FROM groups WHERE groupId = $groupId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

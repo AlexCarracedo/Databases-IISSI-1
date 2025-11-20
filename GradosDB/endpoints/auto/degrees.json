@@ -1,0 +1,60 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'degrees'",
+        "route": "/degrees",
+        "method": "GET",
+        "sql": "SELECT * FROM degrees",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'degrees' by its primary key",
+        "route": "/degrees/$degreeId",
+        "method": "GET",
+        "sql": "SELECT * FROM degrees WHERE degreeId = $degreeId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'degrees'",
+        "route": "/degrees",
+        "method": "POST",
+        "sql": "INSERT INTO degrees (name, years) VALUES ($name, $years)",
+        "request_body_params": [
+            "name",
+            "years"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'degrees' by its primary key",
+        "route": "/degrees/$degreeId",
+        "method": "PUT",
+        "sql": "UPDATE degrees SET name = $name, years = $years WHERE degreeId = $degreeId",
+        "request_body_params": [
+            "name",
+            "years"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'degrees' by its primary key",
+        "route": "/degrees/$degreeId",
+        "method": "DELETE",
+        "sql": "DELETE FROM degrees WHERE degreeId = $degreeId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

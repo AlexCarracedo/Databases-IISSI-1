@@ -1,31 +1,31 @@
 USE GradosDB;
 
-/*
-DELIMITER //
-CREATE OR REPLACE PROCEDURE procDeleteGrades (studentDni CHAR(9))
-BEGIN
-	DECLARE id INT;
-	SET id = (SELECT studentId s FROM students s WHERE s.dni = studentDni);
-	DELETE FROM grades WHERE studentId = id;
-END //
-DELIMITER ;
 
-CALL procDeleteGrades ('12345678A');
+-- DELIMITER //
+-- CREATE OR REPLACE PROCEDURE procDeleteGrades (studentDni CHAR(9))
+-- BEGIN
+--	DECLARE id INT;
+--	SET id = (SELECT studentId s FROM students s WHERE s.dni = studentDni);
+--	DELETE FROM grades WHERE studentId = id;
+-- END //
+-- DELIMITER ;
 
-DELIMITER //
-CREATE  OR REPLACE PROCEDURE procDeleteData()
-BEGIN
-	DELETE FROM grades;
-	DELETE FROM groupsstudents;
-	DELETE FROM students;
-	DELETE FROM grades;
-	DELETE FROM subjects;
-	DELETE FROM degrees;
-END //
-DELIMITER ;
+-- CALL procDeleteGrades ('12345678A');
 
-CALL procDeleteData;
-*/
+-- DELIMITER //
+-- CREATE  OR REPLACE PROCEDURE procDeleteData()
+-- BEGIN
+--	DELETE FROM grades;
+--	DELETE FROM groupsstudents;
+--	DELETE FROM students;
+--	DELETE FROM grades;
+--	DELETE FROM subjects;
+--	DELETE FROM degrees;
+-- END //
+-- DELIMITER ;
+
+-- CALL procDeleteData;
+
 
 DELIMITER //
 CREATE OR REPLACE PROCEDURE rf_001agnadirNotaAlumno (nombregrupo VARCHAR(30),
@@ -52,10 +52,10 @@ BEGIN
 	RETURN avgStudentGrade;
 END //
 DELIMITER ;
-/*
-SELECT avgGrade(2);
-SELECT s.firstName, s.surname, avgGrade(s.studentId) FROM students s;
-*/
+
+-- SELECT avgGrade(2);
+-- SELECT s.firstName, s.surname, avgGrade(s.studentId) FROM students s;
+
 
 -- RF-003: Obtener un listado de alumnos por orden alfabético con nombre, apellidos, asignatura y grupo.
 DELIMITER //

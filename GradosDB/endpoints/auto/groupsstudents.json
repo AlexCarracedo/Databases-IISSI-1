@@ -1,0 +1,60 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'groupsstudents'",
+        "route": "/groupsstudents",
+        "method": "GET",
+        "sql": "SELECT * FROM groupsstudents",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'groupsstudents' by its primary key",
+        "route": "/groupsstudents/$groupStudentId",
+        "method": "GET",
+        "sql": "SELECT * FROM groupsstudents WHERE groupStudentId = $groupStudentId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'groupsstudents'",
+        "route": "/groupsstudents",
+        "method": "POST",
+        "sql": "INSERT INTO groupsstudents (groupId, studentId) VALUES ($groupId, $studentId)",
+        "request_body_params": [
+            "groupId",
+            "studentId"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'groupsstudents' by its primary key",
+        "route": "/groupsstudents/$groupStudentId",
+        "method": "PUT",
+        "sql": "UPDATE groupsstudents SET groupId = $groupId, studentId = $studentId WHERE groupStudentId = $groupStudentId",
+        "request_body_params": [
+            "groupId",
+            "studentId"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'groupsstudents' by its primary key",
+        "route": "/groupsstudents/$groupStudentId",
+        "method": "DELETE",
+        "sql": "DELETE FROM groupsstudents WHERE groupStudentId = $groupStudentId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}

@@ -1,18 +1,18 @@
 USE GradosDB;
 
-/*
-DELIMITER //
-CREATE OR REPLACE TRIGGER rn_001triggerWithHonours
-BEFORE INSERT ON grades
-FOR EACH ROW
-BEGIN
-	IF (NEW.withHonours = 1 AND NEW.value < 9.0) THEN
-		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT =
-		'You cannot insert a grade with honours whose value is less than 9';
-	END if;
-END //
-DELIMITER ;
-*/
+
+-- DELIMITER //
+-- CREATE OR REPLACE TRIGGER rn_001triggerWithHonours
+-- BEFORE INSERT ON grades
+-- FOR EACH ROW
+-- BEGIN
+--	IF (NEW.withHonours = 1 AND NEW.value < 9.0) THEN
+--		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT =
+--		'You cannot insert a grade with honours whose value is less than 9';
+--	END if;
+-- END //
+-- DELIMITER ;
+
 
 DELIMITER //
 
@@ -39,25 +39,25 @@ BEGIN
 END //
 
 DELIMITER ;
-/*
-DELIMITER //
 
-CREATE OR REPLACE TRIGGER rn004_triggerGradeStudentGroup
-BEFORE INSERT ON grades
-FOR EACH ROW
-BEGIN
-	DECLARE isInGroup INT;
-	SET isInGroup = (SELECT COUNT(*)
-		FROM groupsstudents
-			WHERE studentId = NEW.studentId AND groupid = NEW.groupId);
-	IF (isInGroup < 1) THEN
-		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT =
-		'A student can not have grades for groups in which they are not registered';
-	END if;
-END //
+-- DELIMITER //
 
-DELIMITER ;
-*/
+-- CREATE OR REPLACE TRIGGER rn004_triggerGradeStudentGroup
+-- BEFORE INSERT ON grades
+-- FOR EACH ROW
+-- BEGIN
+--	DECLARE isInGroup INT;
+--	SET isInGroup = (SELECT COUNT(*)
+--		FROM groupsstudents
+--			WHERE studentId = NEW.studentId AND groupid = NEW.groupId);
+--	IF (isInGroup < 1) THEN
+--		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT =
+--		'A student can not have grades for groups in which they are not registered';
+--	END if;
+-- END //
+
+-- DELIMITER ;
+
 
 DELIMITER //
 
@@ -90,22 +90,22 @@ END //
 DELIMITER ;
 
 DELIMITER //
-/*
-CREATE OR REPLACE TRIGGER rn005_triggerGradesChangeDifference
-BEFORE UPDATE ON grades
-FOR EACH ROW
-BEGIN
-	DECLARE difference DECIMAL(4,2);
-	DECLARE student ROW TYPE OF students;
-	SET difference = NEW.value - OLD.value;
-	IF (difference > 4) THEN
-		SELECT * INTO student FROM students WHERE studentId = NEW.studentId;
-		SET @error_message = CONCAT('You can not add ', difference,
-		' points to a grade for the student ', student.firstName, ' ', student.surname);
-		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @error_message;
-	END if;
-END //
-*/
+
+-- CREATE OR REPLACE TRIGGER rn005_triggerGradesChangeDifference
+-- BEFORE UPDATE ON grades
+-- FOR EACH ROW
+-- BEGIN
+-- 	DECLARE difference DECIMAL(4,2);
+-- 	DECLARE student ROW TYPE OF students;
+-- 	SET difference = NEW.value - OLD.value;
+-- 	IF (difference > 4) THEN
+-- 		SELECT * INTO student FROM students WHERE studentId = NEW.studentId;
+-- 		SET @error_message = CONCAT('You can not add ', difference,
+-- 		' points to a grade for the student ', student.firstName, ' ', student.surname);
+-- 		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @error_message;
+-- 	END if;
+-- END //
+
 
 CREATE OR REPLACE TRIGGER rn005_triggerGradesChangeDifference
 BEFORE UPDATE ON grades

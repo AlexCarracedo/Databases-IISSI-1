@@ -1,0 +1,70 @@
+{
+    "getAll": {
+        "description": "Gets all entries from 'students'",
+        "route": "/students",
+        "method": "GET",
+        "sql": "SELECT * FROM students",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "getById": {
+        "description": "Gets an entry from 'students' by its primary key",
+        "route": "/students/$studentId",
+        "method": "GET",
+        "sql": "SELECT * FROM students WHERE studentId = $studentId",
+        "auth_required": false,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "create": {
+        "description": "Creates a new entry in 'students'",
+        "route": "/students",
+        "method": "POST",
+        "sql": "INSERT INTO students (accessMethod, dni, firstName, surname, birthDate, email, password) VALUES ($accessMethod, $dni, $firstName, $surname, $birthDate, $email, $password)",
+        "request_body_params": [
+            "accessMethod",
+            "dni",
+            "firstName",
+            "surname",
+            "birthDate",
+            "email",
+            "password"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "update": {
+        "description": "Updates an existing entry in 'students' by its primary key",
+        "route": "/students/$studentId",
+        "method": "PUT",
+        "sql": "UPDATE students SET accessMethod = $accessMethod, dni = $dni, firstName = $firstName, surname = $surname, birthDate = $birthDate, email = $email, password = $password WHERE studentId = $studentId",
+        "request_body_params": [
+            "accessMethod",
+            "dni",
+            "firstName",
+            "surname",
+            "birthDate",
+            "email",
+            "password"
+        ],
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    },
+    "delete": {
+        "description": "Deletes an existing entry in 'students' by its primary key",
+        "route": "/students/$studentId",
+        "method": "DELETE",
+        "sql": "DELETE FROM students WHERE studentId = $studentId",
+        "auth_required": true,
+        "allowed_roles": [
+            "*"
+        ]
+    }
+}
